@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Flipbook Birthday Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
       box-sizing: border-box;
@@ -15,14 +16,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       font-family: 'Segoe UI', sans-serif;
     }
 
     .book {
       position: relative;
-      width: 300px;
-      height: 400px;
+      width: 90vw;
+      max-width: 350px;
+      aspect-ratio: 3 / 4;
       perspective: 1500px;
     }
 
@@ -38,28 +40,33 @@
       transform-style: preserve-3d;
       transform-origin: left;
       transition: transform 1s ease;
-      padding: 30px;
+      padding: 8% 5%;
       text-align: center;
       backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .page h1 {
       color: #ff4081;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      font-size: 1.5em;
     }
 
     .page p {
       color: #444;
-      font-size: 1.1em;
+      font-size: 1em;
+      margin: 10px 0;
     }
 
     .page .emoji {
-      font-size: 40px;
-      margin-bottom: 20px;
+      font-size: 2.5em;
+      margin-bottom: 15px;
     }
 
     .page button {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 10px 18px;
       background: #ff4081;
       border: none;
@@ -69,13 +76,49 @@
       font-size: 1em;
     }
 
-    /* Z-index layering */
+    .final-message {
+      color: #d81b60;
+      font-size: 1.1em;
+      margin-top: 20px;
+      line-height: 1.6em;
+    }
+
+    .signature {
+      margin-top: 15px;
+      font-style: italic;
+      font-size: 1.05em;
+      color: #ff1493;
+    }
+
     #page1 { z-index: 3; background-color: #fff9fc; }
     #page2 { z-index: 2; background-color: #f5faff; }
     #page3 { z-index: 1; background-color: #fafff3; }
 
     .flipped {
       transform: rotateY(-180deg);
+    }
+
+    @media (max-width: 480px) {
+      .page h1 {
+        font-size: 1.2em;
+      }
+
+      .page p {
+        font-size: 0.95em;
+      }
+
+      .page .emoji {
+        font-size: 2em;
+      }
+
+      .page button {
+        font-size: 0.9em;
+        padding: 8px 14px;
+      }
+
+      .final-message {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
@@ -98,23 +141,22 @@
     <button onclick="flipPage(2)">Next ➡️</button>
   </div>
 
-  <!-- Page 3 (Final Page) -->
+  <!-- Page 3 (Final Message Page) -->
   <div class="page" id="page3">
     <div class="emoji">🎁✨</div>
     <h1>Wishing You the Best!</h1>
-    <p>Here’s to another year of amazing memories and big dreams!</p>
-    <button onclick="resetBook()">🔁 Replay</button>
+    <p class="final-message">
+      On this special day, I just want to say how much you mean to me.<br>
+      You light up my world like no one else.<br>
+      May your journey ahead be as beautiful as your heart. 💕
+    </p>
+    <div class="signature">With all my love,<br>Yours ❤️</div>
   </div>
 </div>
 
 <script>
   function flipPage(pageNumber) {
     document.getElementById(`page${pageNumber}`).classList.add('flipped');
-  }
-
-  function resetBook() {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => page.classList.remove('flipped'));
   }
 </script>
 
