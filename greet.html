@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+            overflow: hidden;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .greeting {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            z-index: 1;
+            padding: 20px;
+            max-width: 90%;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInSlide 1s ease-in-out forwards;
+        }
+        .poem {
+            font-size: 1.5rem;
+            max-width: 80%;
+            margin-top: 20px;
+            line-height: 1.5;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInSlide 1s ease-in-out forwards 1s;
+        }
+        .next-button {
+            position: absolute;
+            bottom: 20px;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            background: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: glow 1s infinite alternate, fadeInButton 1s ease-in-out forwards;
+            opacity: 0;
+            display: none;
+        }
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInButton {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px white;
+            }
+            to {
+                box-shadow: 0 0 20px white;
+            }
+        }
+        .sparkle, .firework {
+            position: absolute;
+            border-radius: 50%;
+        }
+        .sparkle {
+            width: 5px;
+            height: 5px;
+            background: white;
+            box-shadow: 0 0 5px white;
+            animation: sparkleAnimation 1s linear infinite;
+        }
+        @keyframes sparkleAnimation {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+        .firework {
+            width: 10px;
+            height: 10px;
+            background: white;
+            opacity: 1;
+            animation: fireworkAnimation 1s ease-out forwards;
+        }
+        @keyframes fireworkAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(10);
+                opacity: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            .greeting {
+                font-size: 2rem;
+                padding: 10px;
+                max-width: 100%;
+            }
+            .poem {
+                font-size: 1.2rem;
+                max-width: 100%;
+            }
+            .next-button {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="greeting">Welcome to the Celebration!</div>
+    <div class="poem">
+        Happy birthday, shine so bright,
+    <br>Like the stars that glow at night.
+    <br>Smiles and laughter, joy and cheer,
+    <br>Grow more magical every year.
+
+    <br>Make a wish and chase your dreams,
+    <br>Life is sweeter than it seems.
+    <br>Cake and candles, hugs so tight,
+    <br>Hearts around you feel so light.
+    <br>Here’s to love, to joy, to play—
+    <br>Wishing you a perfect day! 🎂✨
+
+
+    </div>
+    <button class="next-button" onclick="goToNextPage()">Next</button>
+    <script>
+        function createSparkle() {
+            const sparkle = document.createElement("div");
+            sparkle.classList.add("sparkle");
+            document.body.appendChild(sparkle);
+
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+        setInterval(createSparkle, 100);
+
+        function createFirework() {
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+            document.body.appendChild(firework);
+
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * (window.innerHeight / 2);
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        }
+        setInterval(createFirework, 2000);
+
+        function goToNextPage() {
+            window.location.href = "cake.html";
+        }
+
+        setTimeout(() => {
+            let button = document.querySelector(".next-button");
+            button.style.display = "block";
+            setTimeout(() => {
+                button.style.opacity = "1";
+            }, 100);
+        }, 3000);
+    </script>
+</body>
+</html>

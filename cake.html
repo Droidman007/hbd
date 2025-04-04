@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Cake</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      font-family: sans-serif;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .box {
+      width: 40%;
+      height: 500px;
+      border: 1px black solid;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+    }
+
+    .flm, .cndl, .lr1, .lr2, .lr3 {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .flm {
+      width: 8px;
+      height: 15px;
+      background-image: linear-gradient(to right, rgb(255, 73, 73), rgb(254, 124, 24));
+      border-radius: 5px;
+      box-shadow: inset 0px 0px 10px white;
+    }
+
+    .cndl {
+      width: 15px;
+      height: 50px;
+      background-image: linear-gradient(to right, rgb(255, 73, 73), rgb(254, 24, 93));
+      box-shadow: inset 0px 0px 10px white;
+    }
+
+    .lr1, .lr2, .lr3 {
+      border-radius: 5px;
+      box-shadow: inset 0px 0px 10px white;
+    }
+
+    .lr1 {
+      width: 200px;
+      height: 50px;
+      background-image: linear-gradient(to bottom, rgb(255, 157, 230), rgb(206, 90, 255));
+    }
+
+    .lr2 {
+      width: 250px;
+      height: 50px;
+      background-image: linear-gradient(to bottom, rgb(255, 179, 236), rgb(206, 90, 255));
+    }
+
+    .lr3 {
+      width: 300px;
+      height: 50px;
+      background-image: linear-gradient(to bottom, rgb(255, 157, 230), rgb(206, 90, 255));
+    }
+
+    .message {
+      position: absolute;
+      text-align: center;
+      font-size: 30px;
+      color: #ff0080;
+      opacity: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      animation: floatHearts 6s linear infinite;
+      font-size: 24px;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes blow {
+      to {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.5);
+      }
+    }
+
+    @keyframes hideCandle {
+      to {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+
+    @keyframes hideLayer {
+      to {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+
+    @keyframes showMessage {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .start-btn, .next-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .start-btn:hover, .next-btn:hover {
+      background: #ff1493;
+    }
+
+    .next-btn {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 11;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts-container"></div>
+
+  <div class="box" id="cake-box">
+    <div class="flm" id="flm"></div>
+    <div class="cndl" id="cndl"></div>
+    <div class="lr1" id="lr1"></div>
+    <div class="lr2" id="lr2"></div>
+    <div class="lr3" id="lr3"></div>
+    <div class="message" id="msg">🎉 Wish You a Very Happy Birthday! 🎂</div>
+    <button class="start-btn" id="startBtn" onclick="startAnimation()">Blow Candle</button>
+    <button class="next-btn" id="nextBtn" onclick="goToNext()">Next ➡️</button>
+  </div>
+
+  <script>
+    function startAnimation() {
+      document.getElementById("startBtn").style.display = "none";
+
+      document.getElementById("flm").style.animation = "blow 1s ease-in-out forwards";
+
+      setTimeout(() => {
+        document.getElementById("cndl").style.animation = "hideCandle 0.5s ease-in-out forwards";
+      }, 1000);
+
+      setTimeout(() => {
+        document.getElementById("lr1").style.animation = "hideLayer 0.5s ease-in-out forwards";
+      }, 2500);
+
+      setTimeout(() => {
+        document.getElementById("lr2").style.animation = "hideLayer 0.5s ease-in-out forwards";
+      }, 3500);
+
+      setTimeout(() => {
+        document.getElementById("lr3").style.animation = "hideLayer 0.5s ease-in-out forwards";
+      }, 4500);
+
+      setTimeout(() => {
+        const msg = document.getElementById("msg");
+        msg.style.opacity = 1;
+        msg.style.animation = "showMessage 1s ease-in-out forwards";
+
+        document.getElementById("nextBtn").style.display = "block";
+      }, 5500);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+      document.getElementById("hearts-container").appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    setInterval(createHeart, 300);
+
+    function goToNext() {
+      // Redirect or load next page here
+      window.location.href = "card.html"; // Replace with your actual link
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flipbook Birthday Card</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top left, #fceaff, #e0f7fa);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .book {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      perspective: 1500px;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transform-style: preserve-3d;
+      transform-origin: left;
+      transition: transform 1s ease;
+      padding: 30px;
+      text-align: center;
+      backface-visibility: hidden;
+    }
+
+    .page h1 {
+      color: #ff4081;
+      margin-bottom: 15px;
+    }
+
+    .page p {
+      color: #444;
+      font-size: 1.1em;
+    }
+
+    .page .emoji {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .page button {
+      margin-top: 20px;
+      padding: 10px 18px;
+      background: #ff4081;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    /* Z-index layering */
+    #page1 { z-index: 3; background-color: #fff9fc; }
+    #page2 { z-index: 2; background-color: #f5faff; }
+    #page3 { z-index: 1; background-color: #fafff3; }
+
+    .flipped {
+      transform: rotateY(-180deg);
+    }
+  </style>
+</head>
+<body>
+
+<div class="book">
+  <!-- Page 1 (Front Cover) -->
+  <div class="page" id="page1">
+    <div class="emoji">🎈🎉</div>
+    <h1>Happy Birthday!</h1>
+    <p>Today is all about you. Let's flip to the fun stuff!</p>
+    <button onclick="flipPage(1)">Next ➡️</button>
+  </div>
+
+  <!-- Page 2 (Middle) -->
+  <div class="page" id="page2">
+    <div class="emoji">🎂💖</div>
+    <h1>Celebrate!</h1>
+    <p>May your day be filled with laughter, love, and cake!</p>
+    <button onclick="flipPage(2)">Next ➡️</button>
+  </div>
+
+  <!-- Page 3 (Final Page) -->
+  <div class="page" id="page3">
+    <div class="emoji">🎁✨</div>
+    <h1>Wishing You the Best!</h1>
+    <p>Here’s to another year of amazing memories and big dreams!</p>
+    <button onclick="resetBook()">🔁 Replay</button>
+  </div>
+</div>
+
+<script>
+  function flipPage(pageNumber) {
+    document.getElementById(`page${pageNumber}`).classList.add('flipped');
+  }
+
+  function resetBook() {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('flipped'));
+  }
+</script>
+
+</body>
+</html>

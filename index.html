@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: Arial, Verdana, Helvetica;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .show{
+            opacity: 1;
+        }
+
+        body {
+            animation: bg 5s ease-in-out infinite alternate;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .np {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .msg, .nxt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px #ffffff, inset 0px 0px 10px #ffffff;
+            font-weight: bold;
+        }
+
+        .msg {
+            background: #FFCCFF;
+            width: 400px;
+            height: 150px;
+            font-size: 20px;
+            margin-top: 50px;
+        }
+
+        .nxt {
+            transition: opacity 0.6s linear;
+            background: #fe5a5a;
+            width: 250px;
+            height: 50px;
+            font-size: 15px;
+            color: white;
+            margin-top: 50px;
+        }
+
+        @keyframes bg {
+            0% { background-image: linear-gradient(to right, #FFCCFF, #d8b1ff); }
+            100% { background-image: linear-gradient(to right, #d8b1ff, #FFCCFF); }
+        }
+
+        .emos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            gap: 30px;
+            flex-wrap: nowrap; /* Prevents emojis from breaking into a new line */
+            overflow-x: auto; /* Allows scrolling if needed */
+        }
+
+        .heart {
+            padding: 10px;
+            font-size: 30px;
+            animation: hg 1s infinite alternate ease-in-out;
+            position: relative;
+        }
+        .nxt {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s linear, visibility 0.6s;
+}
+
+.nxt.show {
+    opacity: 1;
+    visibility: visible;
+}
+.gif{
+    background-image:url("1.gif") ;
+}
+a{
+    text-decoration: none;
+}
+
+
+        @keyframes hg {
+            0% { bottom: 10px; }
+            100% { bottom: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .msg {
+                width: 90%;
+                height: 120px;
+                font-size: 16px;
+            }
+
+            .nxt {
+                width: 80%;
+                height: 45px;
+                font-size: 14px;
+            }
+
+            .emos {
+                gap: 15px;
+                justify-content: space-between; /* Distributes emojis evenly */
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .heart {
+                font-size: 24px;
+                padding: 5px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .msg {
+                width: 350px;
+                height: 130px;
+            }
+
+            .nxt {
+                width: 220px;
+                height: 45px;
+            }
+
+            .emos {
+                gap: 20px;
+            }
+
+            .heart {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="np">
+        <div class="emos">
+            <div class="heart">🌸</div>
+            <div class="heart">❤️</div>
+            <div class="heart">✨</div>
+            <div class="heart">⭐</div>
+            <div class="heart">🤗</div>
+        </div>
+        <button class="msg" id="mb">I have something for you😄</button>
+        <a href="greet.html">
+         <button class="nxt" id="nb">Come with me</button>
+        </a>
+        <div class="gif"></div>
+    </div>
+</body>
+<script type="text/javascript">
+var btn = document.getElementById('mb');
+var b = document.getElementById('nb');
+
+btn.addEventListener('click', function() {
+  b.classList.toggle('show');
+});
+
+</script>
+</html>
